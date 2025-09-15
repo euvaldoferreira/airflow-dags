@@ -79,14 +79,21 @@ Veja o arquivo `dags/example_dag.py` para um exemplo básico.
 Exemplo de teste automatizado para DAGs disponível em `tests/test_example_dag.py`.
 
 ### Como executar os testes
-1. Instale as dependências necessárias:
+1. Instale as dependências de desenvolvimento:
 	```bash
-	pip install apache-airflow pytest
+	pip install -r requirements-dev.txt
 	```
-2. Execute os testes:
+2. Execute os testes localmente:
 	```bash
 	pytest tests/
 	```
+3. Pré-commit: Instale e configure o pre-commit para rodar os testes antes de cada commit:
+	```bash
+	pip install pre-commit
+	pre-commit install
+	```
+	O hook irá rodar `pytest` automaticamente.
+4. CI/CD: Os testes automatizados são executados no pipeline do GitHub Actions a cada push ou PR.
 
 Os testes verificam se a DAG pode ser importada corretamente e se sua estrutura está conforme o esperado.
 
