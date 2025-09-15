@@ -74,6 +74,22 @@ Veja o arquivo `dags/example_dag.py` para um exemplo básico.
 
 - Sempre que possível, adicione testes unitários para funções críticas das DAGs.
 
+## Testes Automatizados para DAGs
+
+Exemplo de teste automatizado para DAGs disponível em `tests/test_example_dag.py`.
+
+### Como executar os testes
+1. Instale as dependências necessárias:
+	```bash
+	pip install apache-airflow pytest
+	```
+2. Execute os testes:
+	```bash
+	pytest tests/
+	```
+
+Os testes verificam se a DAG pode ser importada corretamente e se sua estrutura está conforme o esperado.
+
 ## Processo de Deploy das DAGs no Airflow
 
 1. Realize as alterações desejadas nas DAGs dentro do diretório `dags/`.
