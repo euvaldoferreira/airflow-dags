@@ -73,3 +73,19 @@ Veja o arquivo `dags/example_dag.py` para um exemplo básico.
 ### Testes
 
 - Sempre que possível, adicione testes unitários para funções críticas das DAGs.
+
+## Processo de Deploy das DAGs no Airflow
+
+1. Realize as alterações desejadas nas DAGs dentro do diretório `dags/`.
+2. Garanta que todas as validações locais e do CI/CD estejam passando.
+3. Abra um Pull Request para revisão e aprovação.
+4. Após o merge na branch principal, o código será versionado e estará pronto para deploy.
+5. O deploy das DAGs pode ser realizado de duas formas:
+	- **Deploy automático:** Caso o ambiente Airflow esteja integrado ao repositório, o código será sincronizado automaticamente (ex: via CI/CD ou mount do diretório).
+	- **Deploy manual:** Realize o upload dos arquivos do diretório `dags/` para o servidor Airflow, respeitando a estrutura definida.
+6. Verifique no Airflow se as DAGs aparecem corretamente e estão habilitadas.
+7. Monitore a execução inicial para garantir que não há erros.
+
+**Observações:**
+- Nunca faça deploy de DAGs sem revisão e validação.
+- Mantenha o histórico de alterações e utilize tags/releases para versões importantes.
