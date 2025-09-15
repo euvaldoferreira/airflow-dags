@@ -51,6 +51,25 @@ Veja o arquivo `dags/example_dag.py` para um exemplo básico.
 - Toda DAG nova ou alterada deve passar por revisão de outro membro do time.
 - Utilize o checklist de boas práticas antes de aprovar.
 
+## Política de Revisão de Código para DAGs
+
+### Checklist de Revisão
+- [ ] Nome do arquivo e `dag_id` seguem padrão definido
+- [ ] Docstring presente e clara
+- [ ] Código está bem comentado e legível
+- [ ] Não há dados sensíveis ou credenciais no código
+- [ ] Uso correto de variáveis de ambiente
+- [ ] Estrutura e dependências da DAG estão corretas
+- [ ] Testes unitários presentes (se aplicável)
+- [ ] DAG executa sem erros locais
+- [ ] CI/CD passou sem falhas
+
+### Processo
+1. Abrir Pull Request com a nova DAG ou alteração
+2. Outro membro do time realiza revisão utilizando o checklist
+3. Correções sugeridas devem ser aplicadas antes do merge
+4. Após aprovação, realizar merge na branch principal
+
 ### Testes
 
 - Sempre que possível, adicione testes unitários para funções críticas das DAGs.
