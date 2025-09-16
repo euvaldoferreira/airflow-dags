@@ -28,5 +28,13 @@ jobs:
           for dag in dags/*.py; do
             python "$dag" || exit 1
           done
+      - name: Preparar AIRFLOW_HOME
+        run: mkdir -p ${{ github.workspace }}/airflow_home
+      - name: Inicializar banco de dados do Airflow
+        run: airflow db migrate
+        env:
+          AIRFLOW_HOME: ${{ github.workspace }}/airflow_home
       - name: Rodar testes automatizados
         run: pytest tests/
+        env:
+          AIRFLOW_HOME: ${{ github.workspace }}/airflow_home

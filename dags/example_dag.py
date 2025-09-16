@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.operators.dummy import DummyOperator
+from airflow.providers.standard.operators.empty import EmptyOperator
 from datetime import datetime
 
 default_args = {
@@ -10,11 +10,12 @@ default_args = {
 dag = DAG(
     'example_dag',
     default_args=default_args,
-    schedule_interval=None,
+    schedule=None,
     catchup=False,
 )
 
-start = DummyOperator(task_id='start', dag=dag)
-end = DummyOperator(task_id='end', dag=dag)
+
+start = EmptyOperator(task_id='start', dag=dag)
+end = EmptyOperator(task_id='end', dag=dag)
 
 start >> end

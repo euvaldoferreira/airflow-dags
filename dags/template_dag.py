@@ -6,7 +6,7 @@ Descrição: <descreva o objetivo da DAG>
 """
 
 from airflow import DAG
-from airflow.operators.dummy import DummyOperator
+from airflow.providers.standard.operators.empty import EmptyOperator
 from datetime import datetime
 
 default_args = {
@@ -20,11 +20,11 @@ dag = DAG(
     'nome_da_dag',
     default_args=default_args,
     description='Descrição da DAG',
-    schedule_interval=None,
+    schedule=None,
     catchup=False,
 )
 
-start = DummyOperator(task_id='start', dag=dag)
-end = DummyOperator(task_id='end', dag=dag)
+start = EmptyOperator(task_id='start', dag=dag)
+end = EmptyOperator(task_id='end', dag=dag)
 
 start >> end
