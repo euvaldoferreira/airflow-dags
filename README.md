@@ -8,6 +8,46 @@ Este repositório tem como objetivo versionar as DAGs do Airflow utilizadas no a
 
 - `dags/`: Armazena todas as DAGs versionadas.
 
+## Configuração do Ambiente de Desenvolvimento
+
+### Pré-requisitos
+- Python 3.8 ou superior
+- pip
+
+### Configuração do Ambiente Virtual
+
+1. Clone o repositório:
+   ```bash
+   git clone <url-do-repositorio>
+   cd airflow-dags
+   ```
+
+2. Crie e ative o ambiente virtual:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # Linux/Mac
+   # ou
+   venv\Scripts\activate     # Windows
+   ```
+
+3. Instale as dependências de desenvolvimento:
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+
+4. Configure o pre-commit (opcional, mas recomendado):
+   ```bash
+   pre-commit install
+   ```
+
+### Ferramentas de Desenvolvimento Incluídas
+
+- **pytest**: Framework de testes
+- **black**: Formatação automática de código
+- **flake8**: Linter para verificação de estilo
+- **isort**: Organização automática de imports
+- **pre-commit**: Hooks para execução automática de verificações
+
 ### Como adicionar uma nova DAG
 
 1. Crie o arquivo da DAG em `dags/` seguindo o padrão de nomenclatura.
@@ -79,20 +119,52 @@ Veja o arquivo `dags/example_dag.py` para um exemplo básico.
 Exemplo de teste automatizado para DAGs disponível em `tests/test_example_dag.py`.
 
 ### Como executar os testes
-1. Instale as dependências de desenvolvimento:
-	```bash
-	pip install -r requirements-dev.txt
-	```
+
+1. Certifique-se de que o ambiente virtual está ativo:
+   ```bash
+   source venv/bin/activate
+   ```
+
 2. Execute os testes localmente:
-	```bash
-	pytest tests/
-	```
-3. Pré-commit: Instale e configure o pre-commit para rodar os testes antes de cada commit:
-	```bash
-	pip install pre-commit
-	pre-commit install
-	```
-	O hook irá rodar `pytest` automaticamente.
+   ```bash
+   pytest tests/
+   ```
+
+3. Execute verificações de qualidade de código:
+   ```bash
+   # Formatação de código
+   black dags/ tests/
+   
+   # Verificação de estilo
+   flake8 dags/ tests/
+   
+   # Organização de imports
+   isort dags/ tests/
+   ```
+
+4. Pre-commit: Os hooks do pre-commit executarão automaticamente as verificações antes de cada commit:
+   ```bash
+   pre-commit run --all-files  # Executar manualmente em todos os arquivos
+   ```
+
+### Comandos Úteis para Desenvolvimento
+
+```bash
+# Ativar ambiente virtual
+source venv/bin/activate
+
+# Verificar sintaxe das DAGs
+python -m py_compile dags/*.py
+
+# Executar todos os testes e verificações
+pytest tests/ && black --check dags/ tests/ && flake8 dags/ tests/ && isort --check-only dags/ tests/
+
+# Aplicar formatação automática
+black dags/ tests/ && isort dags/ tests/
+
+# Desativar ambiente virtual
+deactivate
+```
 4. CI/CD: Os testes automatizados são executados no pipeline do GitHub Actions a cada push ou PR.
 
 Os testes verificam se a DAG pode ser importada corretamente e se sua estrutura está conforme o esperado.
