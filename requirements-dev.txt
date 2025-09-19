@@ -1,2 +1,6 @@
 apache-airflow==3.0.1
 pytest
+black
+flake8
+pre-commit
+isort
